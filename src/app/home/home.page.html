@@ -7,32 +7,26 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-        <ion-col></ion-col>
-          <ion-col text-center>
-            <h1>{{countDown}}</h1>
+        
+          <ion-col col-12 col-xs text-center>
+            <h1 class="countDownTimer">{{countDown}}</h1>
           </ion-col>
-        <ion-col></ion-col>
+      
     </ion-row>
     <ion-row >
         <ion-col></ion-col>
       <ion-col></ion-col>
       <ion-col text-center>
-        <ion-button color="primary" full (click)="reset()">reset</ion-button>
+        <ion-button size="large" color="primary" full (click)="reset()">reset</ion-button>
       </ion-col>
       <ion-col> 
-        <ion-button color="primary" full (click)="pauseTimer()">Stop</ion-button>
+        <ion-button size="large" color="primary" full (click)="stopButton()">{{pauseText}}</ion-button>
       </ion-col>
       <ion-col></ion-col>
       <ion-col></ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col text-center><h3>Speed</h3></ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-  </ion-grid>
+  <br>
   <ion-button  expand="full" color="light" (click)="changeSpeed(slow)">Slow</ion-button>
   <ion-button  expand="full" color="medium" (click)="changeSpeed(medium)">Medium</ion-button>
   <ion-button expand="full" color="warning" (click)="changeSpeed(fast)">Fast</ion-button>

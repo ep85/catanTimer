@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +17,15 @@ export class HomePage {
   seconds=this.timeoutSeconds-this.minutes*60;
   countDown=this.minutes+"m "+this.seconds+"s"
   interval=null;
+  paused=true;
+  pauseText="Start"
   halfWaySounds
   timeUp
   lastSeconds
   buttonClick
   startTimer(){
+    this.pauseText="Stop"
+    this.paused=false;
     this.interval=setInterval(() =>{
       if(this.timeoutSeconds==0){
         this.timerEnded();
@@ -48,11 +53,28 @@ export class HomePage {
     sound.play();
     setTimeout(function(){
         sound.pause();
-    },
-    time *1000);
+    }, time *1000);
   }
   timerEnded(){
     this.playAudio(this.timeUp,5);
+  }
+  timerChange(){
+    var x = document.getElementsByClassName("countDownTimer");
+    x[0].classList.add("countDownTimerBigger");
+    setTimeout(function(){
+      x[0].classList.remove("countDownTimerBigger");;
+    }, 200);
+  }
+  stopButton(){
+    this.paused=!this.paused;
+    if(this.paused==true){
+      this.pauseText="Start"
+      this.pauseTimer();
+    }else{
+      this.pauseText="Stop"
+      this.timerChange();
+      this.startTimer();
+    }
   }
   pauseTimer(){
     clearInterval(this.interval);
@@ -67,6 +89,7 @@ export class HomePage {
     this.pauseTimer();
     this.setSpeed=speed;
     this.timeoutSeconds=this.setSpeed;
+    this.timerChange();
     this.startTimer();
   }
   ngOnInit(){
