@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { $ } from 'protractor';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+const iosAdmob="ca-app-pub-4450992604186564~5475860250";
+const admobBanner="ca-app-pub-4450992604186564/7718880214";
 /*mport {FcmService} from '../fcm.service';
 import {ToastController } from '@ionic/angular';
 import {tap} from 'rxjs/operators';
@@ -12,6 +15,25 @@ import { Toast } from '@ionic-native/toast/ngx';
   styleUrls: ['home.page.scss']
 }) 
 export class HomePage {
+  constructor(private admobFree: AdMobFree) { 
+    const bannerConfig: AdMobFreeBannerConfig = {
+      // add your config here
+      // for the sake of this example we will just use the test config
+      isTesting: true,
+      autoShow: true,
+      id: "ca-app-pub-4450992604186564/7718880214"
+     };
+     this.admobFree.banner.config(bannerConfig);
+     
+     this.admobFree.banner.prepare()
+       .then(() => {
+         this.admobFree.banner.show();
+         // banner Ad is ready
+         // if we set autoShow to false, then we will need to call the show method here
+       })
+       .catch(e => console.log(e)); 
+  }
+  
   //constructor(platform: Platform, public fcm: FcmService, public toast: Toast){
   //}
   slow=90;

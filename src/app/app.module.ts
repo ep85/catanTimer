@@ -23,6 +23,7 @@ const firebase = {
   storageBucket: "catan-timer.appspot.com",
   messagingSenderId: "163288971204"
  }
+ 
 
 @NgModule({
   declarations: [AppComponent],
