@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
 import { $ } from 'protractor';
-
+/*mport {FcmService} from '../fcm.service';
+import {ToastController } from '@ionic/angular';
+import {tap} from 'rxjs/operators';
+import { Platform } from '@ionic/angular';
+import { Toast } from '@ionic-native/toast/ngx';
+*/
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 }) 
 export class HomePage {
+  //constructor(platform: Platform, public fcm: FcmService, public toast: Toast){
+  //}
   slow=90;
   medium=75;
   fast=60;
@@ -92,7 +99,16 @@ export class HomePage {
     this.timerChange();
     this.startTimer();
   }
+
   ngOnInit(){
       this.setUpAudio();
+     /* this.fcm.getToken();
+      this.fcm.listenToNotifications().pipe(
+        tap(msg => {
+          this.toast.show(msg.body, '5000', 'top').subscribe()
+        })
+      )
+      .subscribe()
+      */
   }
 }
