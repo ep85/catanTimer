@@ -32,6 +32,7 @@
     "@ionic/pro": "2.0.3",
     "angularfire2": "^5.1.0",
     "cordova-admob-sdk": "0.21.0",
+    "cordova-android": "7.1.4",
     "cordova-ios": "4.5.5",
     "cordova-plugin-admob-free": "0.24.0",
     "cordova-plugin-background-mode": "^0.7.2",
@@ -91,7 +92,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-firebase": {},
       "cordova-plugin-x-toast": {},
-      "cordova-plugin-admob-free": {}
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-4450992604186564~5475860250"
+      }
     },
     "platforms": [
       "ios"

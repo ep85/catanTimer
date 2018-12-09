@@ -86,8 +86,10 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-nativeaudio" spec="3.0.9" />
     <plugin name="cordova-plugin-background-mode" spec="0.7.2" />
-    <plugin name="cordova-plugin-firebase" spec="2.0.5" />
     <plugin name="cordova-plugin-x-toast" spec="2.7.2" />
-    <plugin name="cordova-plugin-admob-free" spec="0.24.0" />
+    <plugin name="cordova-plugin-firebase" spec="^2.0.5" />
+    <plugin name="cordova-plugin-admob-free" spec="0.24.0">
+        <variable name="ADMOB_APP_ID" value="ca-app-pub-4450992604186564~5475860250" />
+    </plugin>
     <engine name="ios" spec="4.5.5" />
 </widget>

@@ -22,24 +22,31 @@ export class AppComponent {
   }
   private async presentToast(message) {
     const toast = await this.toastController.create({
-      message,
-      duration: 3000
+      message:message,
+      duration: 5000,
+      position:'top',
+      showCloseButton:true,
+      closeButtonText:"dismiss"
     });
     toast.present();
   }
 
   private notificationSetup() {
     this.fcm.getToken();
+
     this.fcm.listenToNotifications().subscribe(
       (msg) => {
+        console.log("MESSAGE IN:");
+        console.log(msg);
         if (this.platform.is('ios')) {
-          this.presentToast(msg.aps.alert);
+          this.presentToast(msg.aps.alert.body);
         } else {
           this.presentToast(msg.body);
         }
       });
   }
   initializeApp() {
+    console.log("APP OPENED")
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

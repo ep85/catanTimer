@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { $ } from 'protractor';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+import { AdMobFree, AdMobFreeBannerConfig, AdMobFreeInterstitialConfig} from '@ionic-native/admob-free/ngx';
 const iosAdmob="ca-app-pub-4450992604186564~5475860250";
 const admobBanner="ca-app-pub-4450992604186564/7718880214";
+const admobPopup="ca-app-pub-4450992604186564/9436437948";
 /*mport {FcmService} from '../fcm.service';
 import {ToastController } from '@ionic/angular';
 import {tap} from 'rxjs/operators';
@@ -17,25 +18,18 @@ import { Toast } from '@ionic-native/toast/ngx';
 export class HomePage {
   constructor(private admobFree: AdMobFree) { 
     const bannerConfig: AdMobFreeBannerConfig = {
-      // add your config here
-      // for the sake of this example we will just use the test config
-      isTesting: true,
-      autoShow: true,
-      id: "ca-app-pub-4450992604186564/7718880214"
+      isTesting:false,
+      id: admobBanner,
      };
      this.admobFree.banner.config(bannerConfig);
-     
+     /*
      this.admobFree.banner.prepare()
        .then(() => {
-         this.admobFree.banner.show();
-         // banner Ad is ready
-         // if we set autoShow to false, then we will need to call the show method here
-       })
+        
+         })
        .catch(e => console.log(e)); 
+       */
   }
-  
-  //constructor(platform: Platform, public fcm: FcmService, public toast: Toast){
-  //}
   slow=90;
   medium=75;
   fast=60;
@@ -52,7 +46,26 @@ export class HomePage {
   timeUp
   lastSeconds
   buttonClick
+  played=0;
+  popUpAd(){
+    const popupConfig: AdMobFreeInterstitialConfig = {
+      isTesting:false,
+      id: admobPopup,
+     };
+     this.admobFree.interstitial.config(popupConfig);
+      this.admobFree.interstitial.prepare()
+       .then(() => {
+        
+         })
+       .catch(e => console.log(e)); 
+  }
+
   startTimer(){
+    if(this.played==4){
+      this.popUpAd();
+      this.played=0;
+    }
+    this.played++;
     this.pauseText="Stop"
     this.paused=false;
     this.interval=setInterval(() =>{
@@ -121,16 +134,9 @@ export class HomePage {
     this.timerChange();
     this.startTimer();
   }
-
+  
   ngOnInit(){
       this.setUpAudio();
-     /* this.fcm.getToken();
-      this.fcm.listenToNotifications().pipe(
-        tap(msg => {
-          this.toast.show(msg.body, '5000', 'top').subscribe()
-        })
-      )
-      .subscribe()
-      */
+    //this.admobFree.banner.show();
   }
 }
